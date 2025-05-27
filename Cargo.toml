@@ -16,12 +16,12 @@ publish = false
 mpris = "2.0.1"
 rustfm-scrobble-proxy = "2.0.0"
 listenbrainz = "0.8.1"
-serde = { version = "1.0.218", features = ["derive"] }
-toml = "0.8.20"
-dirs = "5.0.1"
-anyhow = "1.0.97"
-rpassword = "7.3.1"
+serde = { version = "1.0.219", features = ["derive"] }
+toml = "0.8.22"
+dirs = "6.0.0"
+anyhow = "1.0.98"
+rpassword = "7.4.0"
 chrono = { version = "0.4", features = ["serde"] }
 
 [dev-dependencies]
-tempfile = "3.10.1"
+tempfile = "3.20.0"
