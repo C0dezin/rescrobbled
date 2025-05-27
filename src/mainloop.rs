@@ -26,6 +26,8 @@ use crate::player;
 use crate::service::Service;
 use crate::track::Track;
 
+use chrono::Utc;
+
 const POLL_INTERVAL: Duration = Duration::from_millis(500);
 
 const MIN_LENGTH: Duration = Duration::from_secs(30);
@@ -57,6 +59,7 @@ pub fn run(config: Config, services: Vec<Service>) -> Result<()> {
     let mut timer = Instant::now();
     let mut current_play_time = Duration::from_secs(0);
     let mut scrobbled_current_song = false;
+    let mut track_start_unix: i64 = 0;
 
     loop {
         if !player::is_active(&player) {
@@ -128,7 +131,7 @@ pub fn run(config: Config, services: Vec<Service>) -> Result<()> {
                         Ok(FilterResult::Filtered(track))
                         | Ok(FilterResult::NotFiltered(track)) => {
                             for service in services.iter() {
-                                match service.submit(&track) {
+                                match service.submit(&track, track_start_unix) {
                                     Ok(()) => {
                                         println!("Track submitted to {} successfully", service)
                                     }
@@ -148,6 +151,7 @@ pub fn run(config: Config, services: Vec<Service>) -> Result<()> {
             {
                 current_play_time = Duration::from_secs(0);
                 scrobbled_current_song = false;
+                track_start_unix = Utc::now().timestamp();
             }
 
             current_play_time += timer.elapsed();
