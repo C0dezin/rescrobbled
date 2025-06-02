@@ -131,7 +131,7 @@ pub fn run(config: Config, services: Vec<Service>) -> Result<()> {
                         Ok(FilterResult::Filtered(track))
                         | Ok(FilterResult::NotFiltered(track)) => {
                             for service in services.iter() {
-                                match service.submit(&track, track_start_unix) {
+                                match service.submit(&track, &track_start) {
                                     Ok(()) => {
                                         println!("Track submitted to {} successfully", service)
                                     }
