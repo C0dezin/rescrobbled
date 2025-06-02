@@ -59,7 +59,7 @@ pub fn run(config: Config, services: Vec<Service>) -> Result<()> {
     let mut timer = Instant::now();
     let mut current_play_time = Duration::from_secs(0);
     let mut scrobbled_current_song = false;
-    let mut track_start_unix: i64 = 0;
+    let mut track_start = SystemTime::now();
 
     loop {
         if !player::is_active(&player) {
