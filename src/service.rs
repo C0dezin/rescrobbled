@@ -123,7 +123,7 @@ impl Service {
     }
 
     /// Scrobble a track.
-    pub fn submit(&self, track: &Track, timestamp: i64) -> Result<()> {
+    pub fn submit(&self, track: &Track, track_start: &SystemTime) -> Result<()> {
         match self {
             Self::LastFM(scrobbler) => {
                 let mut scrobble = Scrobble::new(track.artist(),track.title(),track.album());
