@@ -128,7 +128,8 @@ impl Service {
             Self::LastFM(scrobbler) => {
                 let mut scrobble = Scrobble::new(track.artist(),track.title(),track.album());
 
-                scrobble.with_timestamp(timestamp.try_into().unwrap());
+                let timestamp = track_start.duration_since(UNIX_EPOCH); // might need to handle the error here
+                scrobble.with_timestamp(timestamp.as_secs());
 
                 scrobbler
                     .scrobble(&scrobble)
