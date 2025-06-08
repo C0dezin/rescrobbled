@@ -14,7 +14,7 @@
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 use std::thread;
-use std::time::{Duration, Instant};
+use std::time::{Duration, Instant, SystemTime};
 
 use anyhow::{anyhow, Context, Result};
 
@@ -25,8 +25,6 @@ use crate::filter::{filter_metadata, FilterResult};
 use crate::player;
 use crate::service::Service;
 use crate::track::Track;
-
-use chrono::Utc;
 
 const POLL_INTERVAL: Duration = Duration::from_millis(500);
 
